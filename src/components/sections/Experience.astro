@@ -1,0 +1,42 @@
+---
+import { work } from "@cv";
+import Section from "../Section.astro";
+---
+
+<Section title="Trabajo">
+    <ul>
+        {
+          work.map(
+            ({ name, startDate, endDate, position, summary, highlights, url }) => {
+              const startYear = new Date(startDate).getFullYear()
+              const endYear =
+                endDate != null ? new Date(endDate).getFullYear() : "Actual"
+              const years = `${startYear} - ${endYear}`
+    
+              return (
+                <li class="mt-4">
+                  <article>
+                    <header class="flex items-start justify-between">
+                      <div>
+                        <h3 class="font-semibold">
+                          <a href={url} title={`Ver ${name}`} target="_blank">
+                            {name}
+                          </a>
+                        </h3>
+                        <h4>{position}</h4>
+                      </div>
+    
+                      <time>{years}</time>
+                    </header>
+    
+                    <footer>
+                      <p class="text">{summary}</p>
+                    </footer>
+                  </article>
+                </li>
+              )
+            }
+          )
+        }
+      </ul>
+</Section>
